@@ -2,7 +2,7 @@
 
 <!-- [![CircleCI](https://circleci.com/gh/grafana/simple-datasource/tree/master.svg?style=svg)](https://circleci.com/gh/grafana/simple-datasource/tree/master) -->
 
-This project try to get a flexible file base datasource, now still under basic  developement, welcome to take issue or PR
+This project try to get a flexible file base datasource, now still under basic  developement, welcome to take issue and PR
 
 ## Ideal goal
 * support simpe csv file
