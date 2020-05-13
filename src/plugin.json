@@ -1,18 +1,18 @@
 {
   "type": "datasource",
-  "name": "grafana-file-datasource",
-  "id": "fp-grafana-file-datasource",
+  "name": "test",
+  "id": "fp-test",
   "metrics": true,
+  "backend": true,
+  "executable": "gpx_test",
   "info": {
-    "description": "Grafana File Datasource",
+    "description": "f",
     "author": {
       "name": "Smark",
       "url": ""
     },
     "keywords": [
-      "file",
-      "smark",
-      "file-datasource"
+      "f"
     ],
     "logos": {
       "small": "img/logo.svg",

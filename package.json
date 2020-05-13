@@ -1,7 +1,9 @@
 {
   "name": "fp-grafana-file-datasource",
   "version": "1.0.0",
-  "description": "Grafana File Datasource",
+  "description": "smark,file,file-datasource",
+  "backend": true,
+  "executable": "gpx_simple_datasource_backend",
   "scripts": {
     "build": "grafana-toolkit plugin:build",
     "test": "grafana-toolkit plugin:test",
@@ -13,6 +15,7 @@
   "devDependencies": {
     "@grafana/data": "next",
     "@grafana/toolkit": "next",
+    "@grafana/runtime": "next",
     "@grafana/ui": "next",
     "@types/lodash": "latest"
   },
