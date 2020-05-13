@@ -1,0 +1,22 @@
+{
+  "name": "fp-grafana-file-datasource",
+  "version": "1.0.0",
+  "description": "Grafana File Datasource",
+  "scripts": {
+    "build": "grafana-toolkit plugin:build",
+    "test": "grafana-toolkit plugin:test",
+    "dev": "grafana-toolkit plugin:dev",
+    "watch": "grafana-toolkit plugin:dev --watch"
+  },
+  "author": "Smark",
+  "license": "Apache-2.0",
+  "devDependencies": {
+    "@grafana/data": "next",
+    "@grafana/toolkit": "next",
+    "@grafana/ui": "next",
+    "@types/lodash": "latest"
+  },
+  "engines": {
+    "node": ">=12 <13"
+  }
+}
