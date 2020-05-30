@@ -1,10 +1,10 @@
 {
   "type": "datasource",
-  "name": "test",
-  "id": "fp-test",
+  "name": "File",
+  "id": "fp-grafana-file-datasource",
   "metrics": true,
   "backend": true,
-  "executable": "gpx_test",
+  "executable": "gpx_grafana-file-datasource",
   "info": {
     "description": "f",
     "author": {

@@ -1,7 +1,7 @@
 {
   "name": "fp-grafana-file-datasource",
   "version": "1.0.0",
-  "description": "smark,file,file-datasource",
+  "description": "file datasource",
   "backend": true,
   "executable": "gpx_simple_datasource_backend",
   "scripts": {

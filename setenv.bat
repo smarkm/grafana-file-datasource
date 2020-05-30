@@ -1,0 +1,1 @@
+set PWD=D:\free\grafana-7.0.0\data\plugins\grafana-file-datasource

@@ -3,8 +3,9 @@ package main
 import (
 	"context"
 	"encoding/json"
-	"math/rand"
+	"fmt"
 	"net/http"
+	"os"
 	"time"
 
 	"github.com/grafana/grafana-plugin-sdk-go/backend"
@@ -62,7 +63,8 @@ func (td *SampleDatasource) QueryData(ctx context.Context, req *backend.QueryDat
 }
 
 type queryModel struct {
-	Format string `json:"format"`
+	Format    string `json:"format"`
+	QueryText string `json:"queryText,omitempty"`
 }
 
 func (td *SampleDatasource) query(ctx context.Context, query backend.DataQuery) backend.DataResponse {
@@ -75,16 +77,16 @@ func (td *SampleDatasource) query(ctx context.Context, query backend.DataQuery) 
 	if response.Error != nil {
 		return response
 	}
+	log.DefaultLogger.Info("query", fmt.Sprintf("query data:%v,%s", qm, string(query.JSON)))
 
 	// Log a warning if `Format` is empty.
 	if qm.Format == "" {
 		log.DefaultLogger.Warn("format is empty. defaulting to time series")
 	}
-
 	// create data frame response
 	frame := data.NewFrame("response")
 
-	// add the time dimension
+	// add the time
 	frame.Fields = append(frame.Fields,
 		data.NewField("time", nil, []time.Time{query.TimeRange.From, query.TimeRange.To}),
 	)
@@ -107,10 +109,22 @@ func (td *SampleDatasource) query(ctx context.Context, query backend.DataQuery) 
 func (td *SampleDatasource) CheckHealth(ctx context.Context, req *backend.CheckHealthRequest) (*backend.CheckHealthResult, error) {
 	var status = backend.HealthStatusOk
 	var message = ""
-
-	if rand.Int()%2 == 0 {
+	var config DatasourceConfig
+	err := json.Unmarshal(req.PluginContext.DataSourceInstanceSettings.JSONData, &config)
+	if err != nil {
 		status = backend.HealthStatusError
-		message = "randomized error"
+		message = "parse config error"
+	}
+	if config.Path == "" {
+		status = backend.HealthStatusError
+		message = "No valid path configured"
+	} else {
+		_, err := os.Stat(config.Path)
+		if err != nil {
+			log.DefaultLogger.Error("check health error: %s", err.Error())
+			status = backend.HealthStatusError
+			message = "Please check the path '" + config.Path + "' exist on the server"
+		}
 	}
 
 	return &backend.CheckHealthResult{
